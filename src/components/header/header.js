@@ -1,81 +1,117 @@
-import React from 'react'
-import './header.css'
+import React from "react";
+import "./header.css";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo/logo.png";
 
+const Header = () => {
+	return (
+		<div>
+			<header>
+				<div class="header-1">
+					<div class="share">
+						<img
+							src={logo}
+							style={{
+								height: 80,
+								width: 150,
+								marginLeft: 50,
+							}}
+							alt="tute"
+						/>
+						<span
+							style={{
+								fontSize: 35,
+								textAlign: "center",
+								marginLeft: 500,
+								fontStyle: "normal",
+								marginTop: 5,
+							}}>
+							<b>H e r b s</b>
+						</span>
+						<a href="#" class="fab fa-facebook-f"></a>
+						<a href="#" class="fab fa-twitter"></a>
+						<a href="#" class="fab fa-instagram"></a>
+						<a href="#" class="fab fa-linkedin"></a>
+					</div>
 
-const Header =()=> {
+					<div class="call">
+						<span>
+							{" "}
+							<b>Call Us :</b>{" "}
+						</span>
+						<a href="#">011-1748536</a>
+					</div>
+				</div>
 
+				<div
+					class="header-3"
+					style={{ backgroundColor: "#d7e9d2" }}>
+					<div id="menu-bar" class="fas fa-bars"></div>
 
+					<nav class="navbar">
+						<a
+							href="/"
+							style={{
+								color: "#000",
+								marginLeft: 14,
+								marginRight: 34,
+							}}>
+							home
+						</a>
+						<a
+							href="#category"
+							style={{ color: "#000", marginRight: 34 }}>
+							category
+						</a>
+						<a
+							href="#product"
+							style={{ color: "#000", marginRight: 34 }}>
+							product
+						</a>
+						<a
+							href="#deal"
+							style={{ color: "#000", marginRight: 34 }}>
+							deal
+						</a>
+						<a href="#contact" style={{ color: "#000" }}>
+							contact
+						</a>
+					</nav>
 
-  return (
-    <div>
-
-
-<header>
-
-    <div class="header-1">
-
-        <div class="share">
-            <span> follow us : </span>
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-
-        <div class="call">
-            <span> call us : </span>
-            <a href="#">+123-456-7890</a>
-        </div>
-
-    </div>
-
-    <div class="header-2">
-
-        <a href="#" class="logo"> <i class="fas fa-seedling"></i> LOGO </a>
-
-        <form action="" class="search-bar-container">
-            <input type="search" id="search-bar" placeholder="search here..."/>
-            <label for="search-bar" class="fas fa-search"></label>
-        </form>
-
-    </div>
-
-    <div class="header-3">
-
-        <div id="menu-bar" class="fas fa-bars"></div>
-
-        <nav class="navbar">
-            <a href="/">home</a>
-            <a href="#category">category</a>
-            <a href="#product">product</a>
-            <a href="#deal">deal</a>
-            <a href="#contact">contact</a>
-        </nav>
-
-        <div class="icons">
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-user-circle"></a>
-            
-        </div>
-         <div>
-            <nav>
-         <ul>
-       
-        <li><Link to="client/login">Login</Link></li>
-        <li><Link to="/">Logout</Link></li>
-      </ul>
-    </nav>
-
-         </div>
-    </div>
-
-</header>
-
-
-    </div>
-  )
-}
+					<div class="icons">
+						<a href="#" class="fas fa-shopping-cart"></a>
+						<a href="#" class="fas fa-heart"></a>
+						<a href="#" class="fas fa-user-circle"></a>
+					</div>
+					<div>
+						<nav>
+							<ul>
+								<Link
+									to="/client/login"
+									style={{
+										fontSize: 16,
+										marginRight: 50,
+										color: "#000",
+									}}>
+									Login
+								</Link>
+								<br />
+								<Link
+									to="/"
+									style={{
+										fontSize: 16,
+										marginRight: 50,
+										color: "#000",
+									}}>
+									Logout
+								</Link>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+		</div>
+	);
+};
 
 export default Header;
