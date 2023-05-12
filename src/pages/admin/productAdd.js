@@ -2,28 +2,50 @@ import React from "react";
 import "./productAdd.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import VueSweetalert2 from "sweetalert2";
 
 
 function ProductAdd() {
 
   const [product_ids, setproduct_id] = useState("");
   const [productName, setproduct_name] = useState("");
-  const [productCategory, setproduct_category] = useState(0);
+  const [category, setproduct_category] = useState(0);
   const [price, setprice] = useState(0);
   const [quantity, setproduct_quantity] = useState("");
 const [longDescription, setlongDescription] = useState("");
 const [status, setstatus] = useState(0);
 const [smallDescription, setsmallDescription] = useState("");
 const [listOfproduct, setlistOfproduct] = useState([]);
-const [productImage,setproductImage] = useState("");
+const [image,setproductImage] = useState("");
 const [ProductSearch, setproductSearch] = useState("");
-console.log(productName);
+const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  createProduct();
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate());
+    sub();
+    setIsSubmit(true);
+  };
+
+  const validate = () => {
+    const errors = {};
+
+    if (!productName) {
+      errors.productName= "Package Name is required!";
+    }
+    
+    return errors;
+  };
+  const sub = () => {
+    if (Object.keys(formErrors).length == 0 && isSubmit) {
+      createProduct();
+    }
+  };
+
+
+ 
 
 
 //add product
@@ -31,9 +53,9 @@ const createProduct = () => {
   Axios.post("http://localhost:3001/product/api/create",{
     
   productName,
-  productCategory,
+  category,
   price,
-  productImage,
+  image,
   quantity,
   status,
   smallDescription,
@@ -44,18 +66,27 @@ const createProduct = () => {
       ...listOfproduct,
       {
         productName,
-        productCategory,
+        category,
         price,
-        productImage,
+        image,
         quantity,
         status,
         smallDescription,
         longDescription,
       },
     ]);
+  });
+  VueSweetalert2.fire({
+      toast: true,
+      position: 'center',
+      showConfirmButton: false,
+      timer: 1000,
+      icon: 'success',
+      title: 'Your Package details added to the System',
   }).then(function () {
     // Redirect the user
-    window.location.href = "/admin/addproduct";
+   alert(productName);
+    window.location.href = "/admin/addProduct";
   });
 };
 
@@ -210,7 +241,7 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
               <div className="row mt-4">
                 <div className="col">
                   <select
-                     value={productCategory}
+                     value={category}
                     name="type"
                     className="form-select"
                     aria-label="role" 
@@ -316,7 +347,7 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                     type="submit"
                     id="reg"
                     className="btn btnRegister "
-                   onClick={createProduct}
+                   onClick={handleSubmit}
                   >
                     Add Product
                   </button>

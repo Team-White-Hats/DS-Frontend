@@ -11,7 +11,7 @@ import { ShopContextProvider } from "../context/shop-context";
 import { Shop } from '../components/shop/shop';
 import { Cart } from '../components/shoppingCart/shoppingCart';
 import PaymentForm from '../components/payment/payment';
-import ProductForm from '../pages/admin/productAdd';
+import ProductAdd from '../pages/admin/ProductAdd';
 import Home2 from '../components/home/home2';
 import AdminHeader from '../components/adminComponents/adminheader';
 import Sidebar from '../components/adminComponents/adminsidebar';
@@ -44,7 +44,7 @@ const Approutes =() =>{
                         <AdminHeader/>
                         <Sidebar/>
                         <Switch>
-                            <Route path="/admin/addproduct" render={(props) => <ProductForm/>} exact/>;
+                            <Route path="/admin/addproduct" render={(props) => <ProductAdd/>} exact/>;
                         </Switch>
                     </AdminLayout>
                 </Route>
