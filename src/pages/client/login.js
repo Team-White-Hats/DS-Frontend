@@ -36,10 +36,7 @@ const Login = () => {
           
             <main className='form-main'>        
                 <section className='form-section'>
-                    <div>
-                                                              
-                        <p> Weather App</p>                       
-                                                       
+                    <div>                                                                            
                         <form>                                              
                             <div>
                                 <label htmlFor="email-address">
