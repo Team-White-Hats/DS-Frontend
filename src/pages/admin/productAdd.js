@@ -92,9 +92,74 @@ const createProduct = () => {
 
 
 
+useEffect(() => {
+  Axios.get("http://localhost:3001/product/api/getallproduct").then((response) => {
+    setlistOfproduct(response.data);
+  });
+}, []);
 
 
+ const loadPackageDetailsedit = (StoreProduct) => {
+    document.getElementById("reg").setAttribute("disabled", "true");
+    document.getElementById("delete").setAttribute("disabled", "true");
+    setproduct_id(StoreProduct._id);
+    setproduct_name(StoreProduct.productName);
+    setproduct_category(StoreProduct.category);
+    setprice(StoreProduct.price);
+    setproductImage(StoreProduct.image);
+    setproduct_quantity(StoreProduct.quantity);
+    setstatus(StoreProduct.status);
+    setsmallDescription(StoreProduct.smallDescription);
+    setlongDescription(StoreProduct.longDescription);
+   
+  };
 
+  const loadPackageDetailsdelete = (StoreProduct) => {
+    document.getElementById("reg").setAttribute("disabled", "true");
+    document.getElementById("edit").setAttribute("disabled", "true");
+    setproduct_id(StoreProduct._id);
+    setproduct_name(StoreProduct.productName);
+    setproduct_category(StoreProduct.category);
+    setprice(StoreProduct.price);
+    setproductImage(StoreProduct.image);
+    setproduct_quantity(StoreProduct.quantity);
+    setstatus(StoreProduct.status);
+    setsmallDescription(StoreProduct.smallDescription);
+    setlongDescription(StoreProduct.longDescription);
+  };
+
+  function sendPackage(e) {
+    e.preventDefault();
+    alert("Going to Update Product");
+    const newPackage = {
+      productName,
+      category,
+      price,
+      image,
+      quantity,
+      status,
+      smallDescription,
+      longDescription,
+    };
+    
+    
+    Axios.put(`http://localhost:3001/product/api/products/${product_ids}`,newPackage).then(()=>{})
+      .catch((err) => {
+        console.log(err);
+      });
+      VueSweetalert2.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1800,
+        icon: 'success',
+        title: 'Your Package details Updated Successfully',
+    }).then(function () {
+        // Redirect the user
+        window.location.href = "/admin/addproduct";
+      });
+    
+  }
 
 //image 
 const addcoverimage= () => {
@@ -120,7 +185,7 @@ const addcoverimage= () => {
                   const fileReader = new FileReader();
 
                   fileReader.onload = function (event) {
-                    //setimage_url(event.target.result);
+                    setproductImage(event.target.result);
                   };
 
                   fileReader.readAsDataURL(imgUploaderElement.files[0]);
@@ -160,7 +225,7 @@ const updatecoverimage = () => {
                   const fileReader = new FileReader();
 
                   fileReader.onload = function (event) {
-                // setimage_url(event.target.result);
+                    setproductImage(event.target.result);
                   };
 
                   fileReader.readAsDataURL(imgUploaderElement.files[0]);
@@ -173,8 +238,27 @@ const updatecoverimage = () => {
 const removecoverImages = () => {
 document.getElementById("ProfileImage").removeAttribute("src");
 document.getElementById("btnImgDelete").setAttribute("disabled", "true");
-} 
 
+} 
+const  deletePackage= () => {
+  alert("You want to delete product");
+  Axios.delete(`http://localhost:3001/product/api/products/${product_ids}`).then((res) => {
+      
+   
+    });
+    VueSweetalert2.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1800,
+        icon: 'success',
+        title: 'Package Deleted Successfully',
+    }).then(function () {
+      // Redirect the user
+      window.location.href = "/admin/package";
+    });
+  };
+ 
 
 
 
@@ -203,12 +287,18 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                                     <div className="col d-flex justify-content-end">
                                         <div>
                                             <button className="btn btnAddImg" id="btnAddImg" type="button">
-                                           
+                                            onClick={() => {
+                                                      addcoverimage()
+                                                    }}
                                             </button>
-                                            <button className="btn btnEditImg" id="btnEditImg" type="button">
+                                            <button className="btn btnEditImg" id="btnEditImg" type="button" onClick={() => {
+                                                      updatecoverimage()
+                                                    }}>
                                                 <i className="fa-solid fa-pen text-white"/>
                                             </button>
-                                            <button className="btn btnImgDelete" id="btnImgDelete" type="button" >
+                                            <button className="btn btnImgDelete" id="btnImgDelete" type="button" onClick={() => {
+                                                      removecoverImages()
+                                                    }} >
                                                  
                                                 <i className="fa-solid fa-trash-can d-inline text-white"/>
                                             </button>
@@ -355,11 +445,11 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                     type="button"
                     id="edit"
                     className="btn btnUpdate"
-                   
+                   onClick={sendPackage}
                   >
                     Update 
                   </button>
-                  <button type="button" id="delete" className="btn btnDelete">
+                  <button type="button" id="delete" className="btn btnDelete" onClick={deletePackage}>
                   Delete
                   </button>
                 </div>
@@ -384,6 +474,9 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                     type="button"
                     className="form-control btnSearch text-white"
                     value="Search"
+                    onChange={(e) => {
+                      setproductSearch(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -400,7 +493,6 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                     <th scope="col">Cover Image</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Product Type</th>
-                    <th scope="col">contacts</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
@@ -409,8 +501,55 @@ document.getElementById("btnImgDelete").setAttribute("disabled", "true");
                   </tr>
                 </thead>
                 <tbody>
-              
-                
+                  {listOfproduct &&
+                    listOfproduct
+                      .filter((value) => {
+                        if (ProductSearch === "") {
+                          return value;
+                        } else if (
+                          value.productName
+                            .toLowerCase()
+                            .includes(ProductSearch.toLowerCase())
+                        ) {
+                          return value;
+                        }
+                      })
+                      .map((StoreProduct, i) => (
+                        <tr class="crs-tr" data-status="active">
+                          <td className="crs-td">{StoreProduct._id}</td>
+                          <td className="crs-td">< img src={StoreProduct.image} class="crsthumimg" alt=""/></td>
+                          <td className="crs-td">
+                            {StoreProduct.productName}
+                          </td>
+                          <td className="crs-td">
+                            {StoreProduct.category}
+                          </td>
+                          <td className="crs-td">
+                            {StoreProduct.quantity}
+                          </td>
+                          <td className="crs-td">{StoreProduct.price}</td>
+                          <td className="crs-td">{StoreProduct.status}</td>
+                          <td>
+                          <button
+                    type="button"
+                    id="edit"
+                    className="btn btnUpdate"
+                    onClick={loadPackageDetailsedit}
+                  >
+                    Update 
+                  </button>
+                  <button
+                    type="button"
+                    id="edit"
+                    className="btn btnUpdate"
+                    onClick={loadPackageDetailsdelete}
+                  >
+                  Delete
+                  </button>
+                </td>
+                          
+                        </tr>
+                      ))}
                 </tbody>
               </table>
             </div>
