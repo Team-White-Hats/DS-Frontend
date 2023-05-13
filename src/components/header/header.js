@@ -50,7 +50,7 @@ const Header = () => {
 
 					<nav class="navbar">
 						<a
-							href="/"
+							href="/client"
 							style={{
 								color: "#000",
 								marginLeft: 14,

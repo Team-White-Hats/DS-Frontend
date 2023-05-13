@@ -3,10 +3,16 @@ import "./productAdd.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import VueSweetalert2 from "sweetalert2";
-
+import {
+	MDBIcon,
+	MDBCol,
+	MDBCardBody,
+	MDBRadio,
+	MDBCard,
+	MDBBtn,
+} from "mdb-react-ui-kit";
 
 function ProductAdd() {
-
   const [product_ids, setproduct_id] = useState("");
   const [productName, setproduct_name] = useState("");
   const [category, setproduct_category] = useState(0);

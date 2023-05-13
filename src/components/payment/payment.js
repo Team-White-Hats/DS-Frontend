@@ -26,7 +26,7 @@ const PaymentForm = () => {
      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
     <Form className="payment-form" style={{width: "100vh", height: 400, marginBottom: 20, }} onSubmit={handleSubmit} >
       <h1 class="text-black mb-4" style={{ textAlign: "center" }}>Payment Details</h1>
-      <MDBRow className=" d-flex" style={{ width: 1500 }}>
+      <MDBRow className=" d-flex" style={{ width: 1500, marginLeft: 80 }}>
         <MDBCol md="10" lg="8" xl="5">
           <MDBCard className="rounded-3">
             <MDBCardBody className="p-4" >

@@ -16,6 +16,7 @@ import Home2 from '../components/home/home2';
 import AdminHeader from '../components/adminComponents/adminheader';
 import Sidebar from '../components/adminComponents/adminsidebar';
 import AdminLayout from '../components/layout/AdminLayout';
+import Delivery from '../components/delivery/delivery'
 
 const Approutes =() =>{
   return (
@@ -33,6 +34,7 @@ const Approutes =() =>{
                                 <Route path="/client/cart" render={(props) => <Cart/>} exact/>;
                                 <Route path="/client/signup" render={(props) => <Signup/>} exact/>;
                                 <Route path="/client/payment" render={(props) => <PaymentForm/>} exact/>;
+                                <Route path="/client/delivery" render={(props) => <Delivery/>} exact/>;
                                 
                                 
                                 </Switch>
