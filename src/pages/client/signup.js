@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { NavLink, useHistory} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {useHistory} from "react-router-dom"
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../../firebase';
 import "./signup.css";
@@ -18,7 +19,7 @@ const Signup = () => {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            navigate("/login")
+            navigate.push("/client/login")
             // ...
         })
         .catch((error) => {
@@ -77,7 +78,7 @@ const Signup = () => {
                    
                     <p>
                         Already have an account?{' '}
-                        <NavLink to="/login" >
+                        <NavLink to="/client/login" >
                             Sign in
                         </NavLink>
                     </p>                   

@@ -11,7 +11,7 @@ import { ShopContextProvider } from "../context/shop-context";
 import { Shop } from '../components/shop/shop';
 import { Cart } from '../components/shoppingCart/shoppingCart';
 import PaymentForm from '../components/payment/payment';
-import ProductAdd from '../pages/admin/ProductAdd';
+import ProductAdd from '../pages/admin/productAdd';
 import Home2 from '../components/home/home2';
 import AdminHeader from '../components/adminComponents/adminheader';
 import Sidebar from '../components/adminComponents/adminsidebar';

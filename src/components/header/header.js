@@ -97,7 +97,7 @@ const Header = () => {
 								</Link>
 								<br />
 								<Link
-									to="/"
+									to="/client"
 									style={{
 										fontSize: 16,
 										marginRight: 50,

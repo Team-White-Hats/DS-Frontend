@@ -106,7 +106,7 @@ const  Home = () =>{
         <img src={supplement} alt=""/>
         <div class="content">
             <h3>Supplements</h3>
-            <a href="/shop" class="btn">shop now</a>
+            <a href="/client/shop" class="btn">shop now</a>
         </div>
     </div>
     <div class="box">

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { NavLink, useHistory} from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import {useHistory} from "react-router-dom";
 import './login.css'
 
 
@@ -17,14 +18,14 @@ const Login = () => {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            navigate("/home")
+            navigate.push("/client/home")
             console.log(user);
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage)
-           
+           console.log(error)
            alert("Invalid Login!")
         });
        
@@ -36,7 +37,10 @@ const Login = () => {
           
             <main className='form-main'>        
                 <section className='form-section'>
-                    <div>                                                                            
+                    <div>
+                                                              
+                        <p> Weather App</p>                       
+                                                       
                         <form>                                              
                             <div>
                                 <label htmlFor="email-address">
@@ -77,7 +81,7 @@ const Login = () => {
                        
                         <p className="text-sm text-white text-center">
                             No account yet? {' '}
-                            <NavLink to="/signup">
+                            <NavLink to="/client/signup">
                                 Sign up
                             </NavLink>
                         </p>
