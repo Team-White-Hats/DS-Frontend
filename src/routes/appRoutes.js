@@ -16,6 +16,7 @@ import Home2 from '../components/home/home2';
 import AdminHeader from '../components/adminComponents/adminheader';
 import Sidebar from '../components/adminComponents/adminsidebar';
 import AdminLayout from '../components/layout/AdminLayout';
+import PaymentAdmin from '../pages/admin/paymentAdmin';
 import Delivery from '../components/delivery/delivery'
 
 const Approutes =() =>{
@@ -47,6 +48,7 @@ const Approutes =() =>{
                         <Sidebar/>
                         <Switch>
                             <Route path="/admin/addproduct" render={(props) => <ProductAdd/>} exact/>;
+                            <Route path="/admin/paymentadmin" render={(props) => <PaymentAdmin/>} exact/>;
                         </Switch>
                     </AdminLayout>
                 </Route>

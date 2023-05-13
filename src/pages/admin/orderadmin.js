@@ -2,7 +2,7 @@ import React from "react";
 import "./productAdd.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import VueSweetalert2 from "sweetalert2";
+
 
 
 function paymentAdmin() {
@@ -13,7 +13,7 @@ const [listOfproduct, setlistOfproduct] = useState([]);
 
 
 useEffect(() => {
-  Axios.get("http://localhost:3001/payment/api/getallpayment").then((response) => {
+  Axios.get("http://localhost:3001/order/api/getallorder").then((response) => {
     setlistOfproduct(response.data);
   });
 }, []);
@@ -23,7 +23,7 @@ useEffect(() => {
   return (
     <div>
       <div className="main_container">
-     <div className="item fw-bold fs-5">Product Management</div>
+     <div className="item fw-bold fs-5">Order Management</div>
         <div className="item">
           <div className="row mt-5 ps-3">
             <div className="row">
@@ -40,7 +40,7 @@ useEffect(() => {
           </div>
          
           <div className="row mt-5 px-3">
-            <h6 className="mb-0 fw-bold mt-2 mb-2 fs-5">Current Products</h6>
+            <h6 className="mb-0 fw-bold mt-2 mb-2 fs-5">Current Orders</h6>
             
 
             <div className="table-responsive">
@@ -50,27 +50,23 @@ useEffect(() => {
               >
                 <thead>
                   <tr>
-                    <th scope="col">Payment ID</th>
-                    <th scope="col">amount</th>
-                    <th scope="col">oderid</th>
-                    <th scope="col">phoneNumber</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">products</th>
+                    <th scope="col">total</th>
                   </tr>
                 </thead>
                 <tbody>
                   {listOfproduct &&
                     listOfproduct
-                      .map((StorePayment, i) => (
+                      .map((Order, i) => (
                         <tr class="crs-tr" data-status="active">
-                          <td className="crs-td">{StorePayment._id}</td>
+                          <td className="crs-td">{Order._id}</td>
                           <td className="crs-td">
-                            {StorePayment.amount}
+                            {Order.products}
                           </td>
                           <td className="crs-td">
-                            {StorePayment.orderid}
+                            {Order.total}
                           </td>
-                          <td className="crs-td">
-                            {StorePayment.phoneNumber}
-                            </td>
                         </tr>
                       ))}
                 </tbody>
